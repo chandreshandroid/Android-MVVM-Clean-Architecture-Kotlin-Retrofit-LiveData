@@ -7,7 +7,11 @@ import com.example.mvvm_kotlin_retrofit_livedata.repository.CountryListApi
 
 class CountryListViewModel():ViewModel() {
 
+
+
+
     fun getCountryResponseLiveData(): LiveData<List<CountryList>> {
+
         return CountryListApi().getCountryList()
     }
 }

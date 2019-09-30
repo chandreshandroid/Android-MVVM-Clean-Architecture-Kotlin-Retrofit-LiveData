@@ -7,10 +7,33 @@
     tools:context=".view.MainActivity">
 
 
-    <androidx.recyclerview.widget.RecyclerView
+    <com.example.mvvm_kotlin_retrofit_livedata.customView.MyRecycleView
+        android:id="@+id/recycleView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/recycleView"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+         />
+
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:id="@+id/progressbar"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/colorAccent"
+        style="@style/Widget.AppCompat.ProgressBar"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/recycleView"></androidx.core.widget.ContentLoadingProgressBar>
+
+    <include layout="@layout/error_view"
+        android:id="@+id/errorView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/recycleView"
+        ></include>
 </androidx.constraintlayout.widget.ConstraintLayout>

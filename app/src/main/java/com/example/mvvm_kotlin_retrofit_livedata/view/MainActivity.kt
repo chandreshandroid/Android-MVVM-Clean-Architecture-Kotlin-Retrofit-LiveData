@@ -10,9 +10,11 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mvvm_kotlin_retrofit_livedata.R
 import com.example.mvvm_kotlin_retrofit_livedata.adapter.CountryAdapter
+import com.example.mvvm_kotlin_retrofit_livedata.customView.MyRecycleView
 import com.example.mvvm_kotlin_retrofit_livedata.model.Country
 import com.example.mvvm_kotlin_retrofit_livedata.viewModel.CountryListViewModel
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.error_view.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -27,6 +29,10 @@ class MainActivity : AppCompatActivity() {
         initialization()
 
         getCountry()
+
+        btnRetry.setOnClickListener {
+            getCountry()
+        }
     }
 
     /**
@@ -48,6 +54,8 @@ class MainActivity : AppCompatActivity() {
         adapter = CountryAdapter(this@MainActivity, countryList)
         recycleView.setAdapter(adapter)
 
+        recycleView.loadingStateView=progressbar
+        recycleView.errorStateView=errorView
         // View Model
         countryViewModel = ViewModelProviders.of(this).get(CountryListViewModel::class.java)
     }
@@ -58,11 +66,20 @@ class MainActivity : AppCompatActivity() {
      * @param @null
      */
     private fun getCountry() {
+
+
+        recycleView.stateViewState=MyRecycleView.RecyclerViewStateEnum.LOADING
+
+
         countryViewModel?.getCountryResponseLiveData()?.observe(this, Observer {
             if(it!=null)
             {
                 countryList.addAll(it[0].data)
                 adapter?.notifyDataSetChanged()
+            }
+            else
+            {
+                recycleView.stateViewState=MyRecycleView.RecyclerViewStateEnum.ERROR
             }
 
         })
