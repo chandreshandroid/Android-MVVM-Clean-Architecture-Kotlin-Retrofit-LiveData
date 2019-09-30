@@ -2,36 +2,33 @@ package com.example.mvvm_kotlin_retrofit_livedata.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.ProgressBar
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mvvm_kotlin_retrofit_livedata.R
-import com.example.mvvm_kotlin_retrofit_livedata.adapter.CountryAdapter
+import com.example.mvvm_kotlin_retrofit_livedata.adapter.MovieAdapter
 import com.example.mvvm_kotlin_retrofit_livedata.customView.MyRecycleView
-import com.example.mvvm_kotlin_retrofit_livedata.model.Country
-import com.example.mvvm_kotlin_retrofit_livedata.viewModel.CountryListViewModel
+import com.example.mvvm_kotlin_retrofit_livedata.model.Movie
+import com.example.mvvm_kotlin_retrofit_livedata.viewModel.MovieListViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.error_view.*
 
 class MainActivity : AppCompatActivity() {
 
 
-    var adapter:CountryAdapter?=null
-    var countryList: ArrayList<Country?> = ArrayList()
-    var countryViewModel:CountryListViewModel?=null
+    var adapter:MovieAdapter?=null
+    var movieList: ArrayList<Movie?> = ArrayList()
+    var moviewListViewModel:MovieListViewModel?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initialization()
 
-        getCountry()
+        getMovie()
 
         btnRetry.setOnClickListener {
-            getCountry()
+            getMovie()
         }
     }
 
@@ -51,30 +48,30 @@ class MainActivity : AppCompatActivity() {
         recycleView.setHasFixedSize(true)
 
         // adapter
-        adapter = CountryAdapter(this@MainActivity, countryList)
+        adapter = MovieAdapter(this@MainActivity, movieList)
         recycleView.setAdapter(adapter)
 
         recycleView.loadingStateView=progressbar
         recycleView.errorStateView=errorView
         // View Model
-        countryViewModel = ViewModelProviders.of(this).get(CountryListViewModel::class.java)
+        moviewListViewModel = ViewModelProviders.of(this).get(MovieListViewModel::class.java)
     }
 
     /**
-     * get Country List  from news api
+     * get Movie List from api
      *
      * @param @null
      */
-    private fun getCountry() {
+    private fun getMovie() {
 
 
         recycleView.stateViewState=MyRecycleView.RecyclerViewStateEnum.LOADING
 
 
-        countryViewModel?.getCountryResponseLiveData()?.observe(this, Observer {
+        moviewListViewModel?.getMovieListResponseLiveData()?.observe(this, Observer {
             if(it!=null)
             {
-                countryList.addAll(it[0].data)
+                movieList.addAll(it.search)
                 adapter?.notifyDataSetChanged()
             }
             else

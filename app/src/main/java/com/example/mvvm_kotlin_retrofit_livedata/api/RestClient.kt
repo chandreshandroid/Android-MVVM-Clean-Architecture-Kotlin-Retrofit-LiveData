@@ -20,7 +20,7 @@ class RestClient {
         val apiVersion = "1.0"
 
         // Base server url
-        var url = "http://betaapplication.com/medical/backend/web/index.php/v1/"
+        var url = " http://www.omdbapi.com/"
 
 
         internal var REST_CLIENT: RestApi? = null

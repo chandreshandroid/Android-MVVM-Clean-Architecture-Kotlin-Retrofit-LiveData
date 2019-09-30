@@ -2,19 +2,23 @@ package com.example.mvvm_kotlin_retrofit_livedata.api
 
 
 
-import com.example.mvvm_kotlin_retrofit_livedata.model.CountryList
+
+import com.example.mvvm_kotlin_retrofit_livedata.model.MovieList
 import retrofit2.Call
 import retrofit2.http.*
+import retrofit2.http.GET
+
+
 
 
 public interface RestApi {
 
 
 
-    @FormUrlEncoded
-    @POST("country/get-country-list")
-    fun countryList(@Field("json") json: String): Call<List<CountryList>>
 
 
+
+    @GET("/")
+    fun moverListOmDb(@Query("t") type:String, @Query("apikey") apiKey:String, @Query("s") search:String): Call<MovieList>
 
 }

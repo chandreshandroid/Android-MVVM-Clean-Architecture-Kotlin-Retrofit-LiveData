@@ -22,7 +22,7 @@ abstract class RestCallback<T>(internal var mContext: Context?) : Callback<T> {
     abstract fun failure()
 
     override fun onResponse(call: Call<T>, response: Response<T>) {
-        if (response.body() != null && response.body() is ArrayList<*> && (response.body() as ArrayList<*>).size > 0) {
+        if (response.body() != null ) {
 
 
             Success(response)
