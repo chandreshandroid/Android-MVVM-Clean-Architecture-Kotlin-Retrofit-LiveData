@@ -56,7 +56,7 @@ class RestClient {
             val gson = GsonBuilder().setLenient().create()
             restAdapter = Retrofit.Builder()
                 .baseUrl(url)
-                .addConverterFactory(GsonConverterFactory.create(gson))
+            .addConverterFactory(GsonConverterFactory.create(gson))
                 .client(
                     setOkHttpClientBuilder()
                         .build()

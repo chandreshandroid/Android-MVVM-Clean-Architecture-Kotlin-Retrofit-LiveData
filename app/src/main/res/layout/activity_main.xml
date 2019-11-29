@@ -1,39 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".view.MainActivity">
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
 
 
-    <com.example.mvvm_kotlin_retrofit_livedata.customView.MyRecycleView
-        android:id="@+id/recycleView"
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-         />
+        android:background="@color/colorSurface"
+        tools:context=".view.MainActivity">
 
-    <androidx.core.widget.ContentLoadingProgressBar
-        android:id="@+id/progressbar"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:indeterminate="true"
-        android:indeterminateTint="@color/colorAccent"
-        style="@style/Widget.AppCompat.ProgressBar"
 
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/recycleView"></androidx.core.widget.ContentLoadingProgressBar>
+        <com.example.mvvm_kotlin_retrofit_livedata.customView.MyRecycleView
+            android:id="@+id/recycleView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
 
-    <include layout="@layout/error_view"
-        android:id="@+id/errorView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/recycleView"
-        ></include>
-</androidx.constraintlayout.widget.ConstraintLayout>
+            />
+
+        <androidx.core.widget.ContentLoadingProgressBar
+            android:id="@+id/progressbar"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/colorAccent"
+            style="@style/Widget.AppCompat.ProgressBar"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/recycleView"></androidx.core.widget.ContentLoadingProgressBar>
+
+        <include
+            layout="@layout/error_view"
+            android:id="@+id/errorView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/recycleView"></include>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

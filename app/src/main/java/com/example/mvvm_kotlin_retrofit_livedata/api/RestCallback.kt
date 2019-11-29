@@ -2,8 +2,6 @@ package com.example.mvvm_kotlin_retrofit_livedata.api
 
 import android.content.Context
 
-import java.util.ArrayList
-
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -16,7 +14,7 @@ abstract class RestCallback<T>(internal var mContext: Context?) : Callback<T> {
 
 
     //success response
-    abstract fun Success(response: Response<T>)
+    abstract fun success(response: Response<T>)
 
     //error
     abstract fun failure()
@@ -25,7 +23,7 @@ abstract class RestCallback<T>(internal var mContext: Context?) : Callback<T> {
         if (response.body() != null ) {
 
 
-            Success(response)
+            success(response)
 
 
         } else {
