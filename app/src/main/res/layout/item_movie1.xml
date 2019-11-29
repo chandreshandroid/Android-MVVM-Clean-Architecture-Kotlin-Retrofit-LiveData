@@ -1,59 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:cardUseCompatPadding="true"
-    app:cardCornerRadius="5dp"
-    app:contentPadding="5dp"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+        <variable
+            name="movie"
+            type="com.example.mvvm_kotlin_retrofit_livedata.model.Movie" />
+        <variable
+            name="movieClick"
+            type="com.example.mvvm_kotlin_retrofit_livedata.listener.MovieItemClicklistener" />
+    </data>
 
-
-
-
-
-    >
-<LinearLayout
-    android:orientation="horizontal"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <com.facebook.drawee.view.SimpleDraweeView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        app:actualImageScaleType="fitXY"
-        android:id="@+id/sdPoster"
-
-
-        ></com.facebook.drawee.view.SimpleDraweeView>
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:layout_marginLeft="5dp"
-    android:layout_marginRight="5dp"
-    android:layout_gravity="center"
-    >
-    <TextView
+    <androidx.cardview.widget.CardView
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:id="@+id/tvTitle"
-        android:textColor="#0F0F0F"
-         android:textSize="18sp"
+        app:cardUseCompatPadding="true"
+        app:cardCornerRadius="5dp"
+        app:contentPadding="5dp"
+         android:onClick="@{() -> movieClick.onMovieItemClick(movie)}"
 
-        ></TextView>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:id="@+id/tvyear"
-        android:textSize="12sp"
+        >
 
-        ></TextView>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-</LinearLayout>
-</LinearLayout>
-</androidx.cardview.widget.CardView>
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:actualImageScaleType="fitXY"
+                android:id="@+id/sdPoster"
+                app:imageurl="@{movie.poster}"
+
+
+                ></com.facebook.drawee.view.SimpleDraweeView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_gravity="center">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:id="@+id/tvTitle"
+                    android:textColor="#0F0F0F"
+                    android:textSize="18sp"
+                    android:text="@{movie.title}"
+
+                    ></TextView>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:id="@+id/tvyear"
+                    android:textSize="12sp"
+                    android:text="@{movie.year}"
+
+                    ></TextView>
+
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

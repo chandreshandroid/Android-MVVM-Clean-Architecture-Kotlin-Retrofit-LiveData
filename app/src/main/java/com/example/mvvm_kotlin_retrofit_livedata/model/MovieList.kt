@@ -1,4 +1,6 @@
 package com.example.mvvm_kotlin_retrofit_livedata.model
+import androidx.databinding.BindingAdapter
+import com.facebook.drawee.view.SimpleDraweeView
 import com.google.gson.annotations.SerializedName
 
 
@@ -23,3 +25,4 @@ data class Movie    (
     @SerializedName("Year")
     val year: String = ""
 )
+
