@@ -4,12 +4,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.databinding.BindingAdapter
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mvvm_kotlin_retrofit_livedata.R
 import com.example.mvvm_kotlin_retrofit_livedata.adapter.MovieAdapter
 import com.example.mvvm_kotlin_retrofit_livedata.customView.MyRecycleView
+import com.example.mvvm_kotlin_retrofit_livedata.databinding.ActivityMainBinding
 import com.example.mvvm_kotlin_retrofit_livedata.listener.MovieItemClicklistener
 import com.example.mvvm_kotlin_retrofit_livedata.model.Movie
 import com.example.mvvm_kotlin_retrofit_livedata.viewModel.MovieListViewModel
@@ -23,15 +25,18 @@ class MainActivity : AppCompatActivity(),MovieItemClicklistener {
     var adapter:MovieAdapter?=null
     var movieList: ArrayList<Movie?> = ArrayList()
     var movieListViewModel:MovieListViewModel?=null
-
+    lateinit var binding:ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        //setContentView(R.layout.activity_main)
+         binding=DataBindingUtil.setContentView(this,R.layout.activity_main)
+
+
         initialization()
 
         getMovie()
 
-        btnRetry.setOnClickListener {
+        binding.errorView.btnRetry.setOnClickListener {
             getMovie()
         }
     }
@@ -41,19 +46,20 @@ class MainActivity : AppCompatActivity(),MovieItemClicklistener {
     private fun initialization() {
 
 
-        recycleView.layoutManager = LinearLayoutManager(this)
+        binding.recycleView.layoutManager = LinearLayoutManager(this)
 
 
-        recycleView.setHasFixedSize(true)
+        binding.recycleView.setHasFixedSize(true)
 
         // adapter
         adapter = MovieAdapter( movieList,this)
-        recycleView.adapter = adapter
+        binding.recycleView.adapter = adapter
 
-        recycleView.loadingStateView=progressbar
-        recycleView.errorStateView=errorView
+        binding.recycleView.loadingStateView=progressbar
+        binding.recycleView.errorStateView=errorView
         // View Model
         movieListViewModel = ViewModelProviders.of(this).get(MovieListViewModel::class.java)
+
     }
 
     /**
@@ -64,7 +70,7 @@ class MainActivity : AppCompatActivity(),MovieItemClicklistener {
     private fun getMovie() {
 
 
-        recycleView.stateViewState=MyRecycleView.RecyclerViewStateEnum.LOADING
+        binding.recycleView.stateViewState=MyRecycleView.RecyclerViewStateEnum.LOADING
 
 
         movieListViewModel?.getMovieListResponseLiveData()?.observe(this, Observer {
@@ -75,7 +81,7 @@ class MainActivity : AppCompatActivity(),MovieItemClicklistener {
             }
             else
             {
-                recycleView.stateViewState=MyRecycleView.RecyclerViewStateEnum.ERROR
+                binding.recycleView.stateViewState=MyRecycleView.RecyclerViewStateEnum.ERROR
             }
 
         })
